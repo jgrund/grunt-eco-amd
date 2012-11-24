@@ -1,7 +1,7 @@
 {
   "name": "grunt-eco-amd",
   "description": "Compiles Eco Templates with an AMD wrapper.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jgrund/grunt-eco-amd",
   "author": {
     "name": "Joe Grund",
