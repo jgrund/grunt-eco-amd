@@ -1,4 +1,4 @@
-# grunt-eco-amd
+# grunt-eco-amd [![Build Status](https://secure.travis-ci.org/jgrund/grunt-eco-amd.png?branch=master)](http://travis-ci.org/jgrund/grunt-eco-amd)
 
 Compiles Eco Templates with an AMD wrapper.
 
@@ -15,14 +15,23 @@ grunt.loadNpmTasks('grunt-eco-amd');
 [getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
 
 ## Documentation
-_(Coming soon)_
+Inside your project's `grunt.js` gruntfile add a section named ```eco_amd```.
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
+The ```eco_amd``` section has a ```compile``` property, inside which you list the files to be placed in an amd wrapper.
+Additionally, an options property can be specified inside which an basePath can be configured.
 
-## Release History
-_(Nothing yet)_
+```javascript
+    eco_amd: {
+      compile: {
+        files: {
+          'temp/templates/*.js': 'app/templates/**/*.eco'
+        }
+      },
+      options: {
+        basePath: 'app/templates'
+      }
+    }
+```
 
-## License
-Copyright (c) 2012 Joe Grund  
-Licensed under the MIT license.
+When the task runs, the templates will be compiled with an AMD wrapper function and placed in the specified path
+with the specified extension.
