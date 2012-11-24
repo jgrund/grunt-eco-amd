@@ -29,7 +29,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "grunt-contrib-lib": "~0.3.0",
+    "grunt-lib-contrib": "~0.3.0",
     "eco": "~1.1.0-rc-3"
   },
   "devDependencies": {
