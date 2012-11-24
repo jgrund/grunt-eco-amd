@@ -6,6 +6,21 @@
  * Licensed under the MIT license.
  */
 
+/**
+ * Compiles an eco template with an AMD compatible function wrapper.
+ * @param {String} source The contents of the file to compile.
+ * @param {Function} callback Function to call with the compiled template as an argument.
+ * @return {undefined}
+ */
+function compileEco(source, callback) {
+  'use strict';
+
+  var indent = require('eco/lib/util').indent;
+  var compiled = 'define(function () {\nreturn ' + indent(require('eco').precompile(source), 2).slice(2) + ' \n});\n';
+
+  callback(compiled);
+}
+
 module.exports = function (grunt) {
   'use strict';
 
@@ -29,20 +44,6 @@ module.exports = function (grunt) {
     // TODO: ditch this when grunt v0.4 is released
     this.files = this.files || helpers.normalizeMultiTaskFiles(this.data, this.target);
 
-    /**
-     * Compiles an eco template with an AMD compatible function wrapper.
-     * @param {String} srcFile The file to read in.
-     * @param {Function} callback Function to call with the compiled template as an argument.
-     * @return {undefined}
-     */
-    function compileEco(srcFile, callback) {
-      var indent = require('eco/lib/util').indent;
-      var source = grunt.file.read(srcFile);
-      var compiled = 'define(function () {\nreturn ' + indent(require('eco').precompile(source), 2).slice(2) + ' \n});\n';
-
-      callback(compiled);
-    }
-
     this.files.forEach(function (file) {
       file.dest = path.normalize(file.dest);
       srcFiles = grunt.file.expandFiles(file.src);
@@ -50,9 +51,10 @@ module.exports = function (grunt) {
       basePath = helpers.findBasePath(srcFiles, options.basePath);
 
       srcFiles.forEach(function (srcFile) {
+        var source = grunt.file.read(srcFile);
         newFileDest = helpers.buildIndividualDest(file.dest, srcFile, basePath);
 
-        compileEco(srcFile, function (compiled) {
+        compileEco(source, function (compiled) {
           grunt.file.write(newFileDest, compiled);
         });
       });
