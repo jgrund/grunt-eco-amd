@@ -1,7 +1,7 @@
 {
   "name": "grunt-eco-amd",
   "description": "Compiles Eco Templates with an AMD wrapper.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/jgrund/grunt-eco-amd",
   "author": {
     "name": "Joe Grund",
@@ -33,7 +33,8 @@
     "eco": "~1.1.0-rc-3"
   },
   "devDependencies": {
-    "grunt": "~0.3.16"
+    "grunt": "~0.3.16",
+    "injectr": "0.4.0"
   },
   "keywords": [
     "gruntplugin",
