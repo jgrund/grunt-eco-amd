@@ -46,7 +46,7 @@ module.exports = function (grunt) {
 
     this.files.forEach(function (file) {
       file.dest = path.normalize(file.dest);
-      srcFiles = grunt.file.expandFiles(file.src);
+      srcFiles = grunt.file.expand(file.src);
 
       basePath = helpers.findBasePath(srcFiles, options.basePath);
 
@@ -56,6 +56,7 @@ module.exports = function (grunt) {
 
         compileEco(source, function (compiled) {
           grunt.file.write(newFileDest, compiled);
+          grunt.log.writeln('File ' + newFileDest + ' created.');
         });
       });
     });
